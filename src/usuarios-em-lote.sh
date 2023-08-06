@@ -1,7 +1,6 @@
 #!/bin/bash
 
-
-#
+# TODO: Criar senha aleatória e salvá-la em arquivo CSV junto com nome de usuário
 #
 #
 
@@ -19,14 +18,21 @@ grep -i martins "${CSV_ALUNOS}" | tail -50 | cut -d, -f1,2 | sed 's/^/ra/' > "${
 CSV_SOARES="soares.csv"
 grep -i soares "${CSV_ALUNOS}" | tail -50 | cut -d, -f1,2 | sed 's/^/ra/' > "${CSV_SOARES}"
 
-echo "Exibição de matrícula e nome dos Martins"
-while IFS="," read matricula nome; do
-    echo "${matricula} -> ${nome_min}"
-    echo samba-tool user create --use-username-as-cn --description "${nome}" "${matricula}"
+# Limpa conteúdo do arquivo
+echo > "martins-criados.csv"
+
+while IFS="," read matricula nome_completo; do
+    senha="$(apg -n 1)"
+    echo samba-tool user create --use-username-as-cn --must-change-at-next-login --description "${nome_completo}" "${matricula}" "${senha}"
+    echo "${matricula},${senha},${nome_completo}" >> "martins-criados.csv"
 done < "${CSV_MARTINS}"
 
+# Limpa conteúdo do arquivo
+echo > "soares-criados.csv"
+
 echo "Exibição de matrícula e nome dos Soares"
-while IFS="," read matricula nome; do
-    echo "${matricula} -> ${nome_min}"
-    echo samba-tool user create --use-username-as-cn --description "${nome}" "${matricula}"
+while IFS="," read matricula nome_completo; do
+    senha="$(apg -n 1)"
+    echo samba-tool user create --use-username-as-cn --description --must-change-at-next-login "${nome_completo}" "${matricula}" "${senha}"
+    echo "${matricula},${senha},${nome_completo}" >> "soares-criados.csv"
 done < "${CSV_SOARES}"
