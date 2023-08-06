@@ -3,8 +3,17 @@ Samba: Criação de usuários e grupos em lote
 
 ## Demonstração
 
-Entre no diretório `demo` e execute:
+Entre no diretório `demo` e execute um dos seguintes scripts:
+
+Versão Shell Script:
 
 - `../src/usuarios-em-lote.sh`
 
-Observe pelas linhas 26 e 36 do script que ele apenas exibe qual seria o comando usado para criação dos usuários.
+Versão Python:
+
+- `../src/usuarios-em-lote.py`
+
+
+Observe que os scripts acima exibem/simulam os comandos que seriam executados[^1].
+
+[^1]: Veja isso na função `simular` definida nos dois scripts.
