@@ -13,6 +13,7 @@ Versão Python:
 
 - `../src/usuarios-em-lote.py`
 
+[![asciicast](https://asciinema.org/a/600851.svg)](https://asciinema.org/a/600851)
 
 Observe que os scripts acima exibem/simulam os comandos que seriam executados[^1].
 
